@@ -15,52 +15,47 @@ def fetchincidents(url):
 # Function to extract incidents data from the PDF
 def extractincidents(pdf_file):
     reader = PdfReader(pdf_file)
+    incident_types = r"(Traffic Stop|Suspicious|Welfare Check|Transfer/Interfacility|Burglary|Contact a Subject|Disturbance/Domestic|Motorist Assist|Noise Complaint|Larceny|Trespassing|Unconscious/Fainting|Medical Call Pd Requested|Shots Heard|Alarm|Supplement Report|Convulsion/Seizure|MVA With Injuries|Overdose/Poisoning|Mutual Aid|Diabetic Problems|Heat/Cold Exposure|Breathing Problems|Public Assist|Runaway or Lost Child|Chest Pain|MVA Non Injury|Public Intoxication|Stroke|Open Door/Premises Check|Check Area|Vandalism|Animal Complaint|Animal Dead|Fire Alarm|Follow Up|Item Assignment|Animal Injured|Fraud|Pick Up Partner|Supplement Report|911 Call Nature Unknown|Falls|Escort/Transport|Animal at Large|Parking Problem|Abdominal Pains/Problems|Indecent Exposure|Animal Bite|Hit and Run|Stolen Vehicle|Sick Person|Harassment / Threats Report|Fire Grass|Assault EMS Needed|Alarm Holdup/Panic|Fight|Fire Smoke Investigation|Heart Problems/AICD|Fire Commercial|Fire Electrical Check|COP DDACTS|Fire Odor Investigation|Extra Patrol|Fire Controlled Burn|Civil Standby|Drunk Driver|Hemorrhage/Lacerations|Warrant Service|Debris in Roadway|Pick Up Items|Found Item|Stand By EMS|Stake Out|Unknown Problem/Man Down|Officer Needed Nature|Assist Police|Unk|Allergies/Envenomations|Road Rage|Fire Carbon Monoxide Alarm|Fire Water Rescue|Fire Down Power Line|Fire Gas Leak|Drowning/Diving/Scuba Accident|Cardiac Respiratory Arrest|Drug Violation|Loud Party)"
+    ori_types = r"(OK0140200|14005|EMSSTAT)"
+    incident_pattern = rf"(\d{{1,2}}/\d{{1,2}}/\d{{4}} \d{{1,2}}:\d{{2}})\s+(\d{{4}}-\d{{8}})\s+(.*?)(?:(\n(?!\d{{1,2}}/\d{{1,2}}/\d{{4}}).*)+)?\s+({incident_types})\s+({ori_types})"
     text = ""
+    for page in range(len(reader.pages)):
+        text += reader.pages[page].extract_text() +"\n"
 
-    # Extract text from each page of the PDF
-    for page in reader.pages:
-        text += page.extract_text()
-    
-    current_incident = []
-    incidents = []
+    lines = text.splitlines()
 
-    for line in text:
-        line = line.strip()
-        
-        # Check if the line starts with a date
-        if re.match(r'\d+/\d+/\d+ \d+:\d+', line):
-            if current_incident:  # If there's an existing incident, save it
-                incidents.append(current_incident)
+    extracted_data = []
+
+    current_location = ''
+    for line in lines:
+        if "Daily Incident Summary (Public)" in line:
+            continue
+        if re.match(r'\d{1,2}/\d{1,2}/\d{4}', line): 
+
+            match = re.match(incident_pattern, line)
+            if match:
+                data_ = match.groups()
+                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])
+            if current_location:
+                if extracted_data:  # Check if extracted_data is not empty
+                    extracted_data[-1][2] += ' ' + data_[2].strip()
+                current_location = ''
+
             
-            # Start a new incident, split on whitespace
-            fields = line.split()
-            
-            # Determine how many fields were extracted
-            if len(fields) >= 5:
-                # Assuming the last field is ORI, the rest are other fields
-                current_incident = fields[:4] + [' '.join(fields[4:])]  # Combine remaining parts into ORI
-            else:
-                current_incident = fields  # Just in case there are fewer fields
 
         else:
-            # Handle appending based on current_incident's length
-            if len(current_incident) == 3:
-                current_incident[2] += ' ' + line  # Append to the location
-            elif len(current_incident) == 4:
-                current_incident[3] += ' ' + line  # Append to the nature of the incident
+            current_location += ' ' + line.strip()
+        
+    if current_location and extracted_data:
+        extracted_data[-1][2] += ' ' + current_location.strip()
 
-        # Save the last incident if it exists
-    if current_incident:
-        incidents.append(current_incident)
-    print(incidents)
-    # Print results for verification
-    for incident in incidents:
-        print(incident)
-
-# Function to create an SQLite database and table
+    return extracted_data
 def createdb(db):
-    conn = sqlite3.connect('incidents.db')
+    conn = sqlite3.connect(db)
     cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE IF EXISTS incidents
+    ''')
 
     # Create incidents table
     cur.execute('''
@@ -101,7 +96,7 @@ def status(db):
     SELECT nature, COUNT(*) 
     FROM incidents 
     GROUP BY nature 
-    ORDER BY COUNT(*) DESC
+    ORDER BY nature
     ''')
 
     nature_counts = cur.fetchall()

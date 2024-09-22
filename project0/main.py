@@ -4,19 +4,17 @@ import func
 
 def main(url):
     incident_data = func.fetchincidents(url)
-
-    print(incident_data)
     
     incidents = func.extractincidents(incident_data)
+    
+
+    db = 'incidents.db'  
+
+    func.createdb(db)
 	
+    func.populatedb(db, incidents)
 
-    # db = 'incidents.db'  
-
-    # func.createdb(db)
-	
-    # func.populatedb(db, incidents)
-
-    # func.status(db)
+    func.status(db)
 
 
 if __name__ == '__main__':
