@@ -3,7 +3,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import unittest
 from io import BytesIO
 from unittest.mock import patch, MagicMock
-import func
+from project0 import func
 class TestDownloadAndExtractIncidents(unittest.TestCase):
     
     @patch('func.requests.get')

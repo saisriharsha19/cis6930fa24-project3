@@ -2,7 +2,7 @@ import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import unittest
 import sqlite3
-import func 
+from project0 import func
 import os
 
 class TestDatabaseFunctions(unittest.TestCase):
