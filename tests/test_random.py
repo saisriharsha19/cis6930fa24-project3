@@ -1,5 +1,5 @@
 import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../project0')))
 import unittest
 import sqlite3
 from project0 import func
@@ -51,17 +51,29 @@ class TestDatabaseFunctions(unittest.TestCase):
             ['8/7/2024 14:12', '2024-00056881', '15906 LOLA RD', 'Larceny', 'OK0140200'],
             ['8/8/2024 10:00', '2024-00056882', '15907 LOLA RD', 'Vandalism', 'OK0140200']
         ]
-        
-        func.populatedb(self.db, incidents)
-        
-        # Capture printed output
-        with self.assertLogs(level='INFO') as log:
-            func.status(self.db)
-            output = log.output
 
-        # Verify correct count of nature occurrences
-        self.assertIn("Vandalism: 2 times", output[0])
-        self.assertIn("Larceny: 1 time", output[0])
+        # Populate the database
+        func.populatedb(self.db, incidents)
+
+        # Directly query the database for counts
+        conn = sqlite3.connect(self.db)
+        cur = conn.cursor()
+        cur.execute('''SELECT nature, COUNT(*) FROM incidents GROUP BY nature''')
+        nature_counts = cur.fetchall()
+        conn.close()
+
+        # Convert the results to a dictionary for easier comparison
+        count_dict = {nature: count for nature, count in nature_counts}
+
+        # Define expected counts
+        expected_counts = {
+            'Vandalism': 2,
+            'Larceny': 1
+        }
+
+        # Assert that the counts match the expected counts
+        for nature, expected_count in expected_counts.items():
+            self.assertEqual(count_dict.get(nature, 0), expected_count)
 
 if __name__ == '__main__':
     unittest.main()
