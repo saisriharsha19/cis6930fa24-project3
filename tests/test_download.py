@@ -36,7 +36,7 @@ class TestDownloadAndExtractIncidents(unittest.TestCase):
         expected = [
             ['8/6/2024 19:24', '2024-00056880', '15905 LOLA RD', 'Vandalism', 'OK0140200'],
             ['8/7/2024 14:12', '2024-00056881', '15906 LOLA RD 15906 LOLA RD ', 'Larceny', 'OK0140200']
-        ]t
+        ]
         self.assertEqual(incidents, expected)
 
 if __name__ == '__main__':
