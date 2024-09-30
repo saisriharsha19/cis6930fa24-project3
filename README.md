@@ -16,8 +16,7 @@ This project involves downloading, extracting, and processing incident data from
 ## How to Install
 To install the required dependencies, ensure you have pipenv installed. Navigate to the project directory and run:
 
-```bash
-Copy code
+```bash 'Copy code'
 pipenv install -e .
 ```
 This will install all the necessary dependencies in an isolated environment.
