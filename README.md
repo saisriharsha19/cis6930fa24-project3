@@ -29,8 +29,12 @@ pipenv run python main.py --incidents <incident-summary-url>
 ```
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
-Testing
-To run the test suite:
+## Testing
+To run the test files in the /tests/ folder
+
+```bash
+pipenv run python -m pytest -v
+```
 
 ```bash Copy code
 pipenv run python -m pytest -v
@@ -41,29 +45,75 @@ The test files are located in the tests/ folder, ensuring that the critical func
 After running the code with an incident PDF, the following output will be printed as an example of the statistical summary:
 
 ```python Copy code
-Abdominal Pains/Problems | 5
-Alarm | 10
-Animal Complaint | 3
-Assault EMS Needed | 1
+911 Call Nature Unknown|1
+Abdominal Pains/Problems|4
+Alarm|7
+Allergies/Envenomations|2
+Animal Bite|1
+Animal Complaint|4
+Animal Dead|2
+Animal Injured|1
 ...
 ```
 ## Functions Overview
 Main File
-main.py The main file contains the main() function which orchestrates the fetching, extracting, and processing of the incident data. The script is designed to be run from the command line, with arguments provided for the incident summary URL.
-
-### fetchincidents(url): Downloads the incident summary PDF from the given URL.
-### extractincidents(pdf_file): Extracts the incidents from the downloaded PDF file.
-### createdb(db): Creates an SQLite database with a table for storing incidents.
-### populatedb(db, incidents): Inserts the extracted incidents into the database.
-### status(db): Displays statistics of incidents, grouped by their nature, to the console.
+### main.py The main file contains the main() function which orchestrates the fetching, extracting, and processing of the incident data. The script is designed to be run from the command line, with arguments provided for the incident summary URL.
+### func.py The functions file contains all the code necessary for executing the pipeline. It contains the following functions,
+#### fetchincidents(url): Downloads the incident summary PDF from the given URL.
+```python
+def fetchincidents(url):
+    pass
+```
+#### extractincidents(pdf_file): Extracts the incidents from the downloaded PDF file.
+```python
+def extractincidents(pdf_file):
+    pass
+```
+#### createdb(db): Creates an SQLite database with a table for storing incidents.
+```python
+def createdb(db):
+    pass
+```
+#### populatedb(db, incidents): Inserts the extracted incidents into the database.
+```python
+def populatedb(db, incidents):
+    pass
+```
+#### status(db): Displays statistics of incidents, grouped by their nature, to the console.
+```python
+def status(db):
+    pass
+```
 ## Test Files
-### test_fetch_data_from_api.py This file tests the fetchincidents() function by mocking a PDF file download using the requests module.
-### test_fetchincidents(): Ensures that the function fetches and returns the correct content type (BytesIO) for a valid URL.
-### test_extractincidents(): Verifies that the incident extraction logic works correctly, parsing the relevant data fields.
-### test_process_data.py This file contains tests for verifying database operations:
+### test_download.py This file tests the fetchincidents() function by mocking a PDF file download using the requests module.
+
+#### test_fetchincidents(): Ensures that the function fetches and returns the correct content type (BytesIO) for a valid URL.
+```python
+def test_fetchincidents():
+    pass
+```
+#### test_extractincidents(): Verifies that the incident extraction logic works correctly, parsing the relevant data fields.
+```python
+def test_extractincidents():
+    pass
+```
+### test_random.py This file contains tests for verifying database operations:
 
 ### test_createdb(): Ensures the SQLite database and incidents table are created properly.
+```python
+def test_createdb():
+    pass
+```
 ### test_populatedb(): Confirms that the incident data is correctly inserted into the database.
+```python
+def test_populatedb():
+    pass
+```
+### test_status(self): Checks the output is being printed correct
+```python
+def test_status(self):
+    pass
+```
 ## Bugs and Assumptions
-Error Handling: If the URL provided is invalid or the PDF cannot be downloaded, the script raises an exception. There's no specific error handling for malformed URLs.
-File Format: The script assumes the PDF file follows the same format as expected for proper incident extraction.
+1. Error Handling: If the URL provided is invalid or the PDF cannot be downloaded, the script raises an exception. There's no specific error handling for malformed URLs.
+2. File Format: The script assumes the PDF file follows the same format as expected for proper incident extraction.
