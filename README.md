@@ -7,7 +7,7 @@
 This project involves downloading, extracting, and processing incident data from a PDF available online. The incident data is extracted and processed, and stored in an SQLite database. Additionally, the assignment involves displaying a statistical summary of the incident types.
 
 1. Fetching PDF: Download a PDF file containing incident summaries from the given URL.
-2. Extracting Incidents: Extract key information from the PDF, including date, incident number, location, nature of the incident, and the ORI (Originating Agency Identifier).
+2. Extracting Incidents: Extract key information from the PDF, including date, incident number, location, nature of the incident, and the ORI.
 3. Database Creation: Create an SQLite database to store the incident data.
 4. Data Insertion: Populate the database with the extracted incidents.
 5. Displaying Statistics: Output a count of incidents, grouped by their nature, to the console.
