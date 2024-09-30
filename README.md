@@ -37,9 +37,6 @@ To run the test files in the /tests/ folder
 pipenv run python -m pytest -v
 ```
 
-```bash Copy code
-pipenv run python -m pytest -v
-```
 The test files are located in the tests/ folder, ensuring that the critical functions work as expected.
 
 ## Example Output
