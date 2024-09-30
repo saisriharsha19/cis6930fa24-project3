@@ -24,29 +24,29 @@ This will install all the necessary dependencies in an isolated environment.
 Fetching and Storing Incidents
 You can run the project by specifying the URL of the incident summary PDF:
 
-bash
-Copy code
+```bash Copy code
 pipenv run python main.py --incidents <incident-summary-url>
+```
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
 Testing
 To run the test suite:
 
-bash
-Copy code
+```bash Copy code
 pipenv run python -m pytest -v
+```
 The test files are located in the tests/ folder, ensuring that the critical functions work as expected.
 
 ## Example Output
 After running the code with an incident PDF, the following output will be printed as an example of the statistical summary:
 
-python
-Copy code
+```python Copy code
 Abdominal Pains/Problems | 5
 Alarm | 10
 Animal Complaint | 3
 Assault EMS Needed | 1
 ...
+```
 ## Functions Overview
 Main File
 main.py The main file contains the main() function which orchestrates the fetching, extracting, and processing of the incident data. The script is designed to be run from the command line, with arguments provided for the incident summary URL.
