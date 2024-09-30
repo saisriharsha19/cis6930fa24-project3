@@ -21,33 +21,31 @@ def extractincidents(pdf_file):
     text = ""
     for page in range(len(reader.pages)):
         text += reader.pages[page].extract_text() +"\n"
-
     lines = text.splitlines()
 
     extracted_data = []
-
     current_location = ''
     for line in lines:
-        if "Daily Incident Summary (Public)" in line:
+        if "Daily Incident Summary (Public)" in line or line is None or "Date / Time Incident Number Location Nature Incident ORI" in line:
             continue
-        if re.match(r'\d{1,2}/\d{1,2}/\d{4}', line): 
 
+        # Check if the line starts a new incident
+        if re.match(r'\d{1,2}/\d{1,2}/\d{4}', line):
+
+            line = re.sub(r'(\d{4}-\d{8})([A-Z])', r'\1 \2', line)
             match = re.match(incident_pattern, line)
             if match:
                 data_ = match.groups()
-                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])
-            if current_location:
-                if extracted_data:  # Check if extracted_data is not empty
-                    extracted_data[-1][2] += ' ' + data_[2].strip()
-                current_location = ''
-
-            
+                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])  
+            current_location = line 
 
         else:
-            current_location += ' ' + line.strip()
-        
-    if current_location and extracted_data:
-        extracted_data[-1][2] += ' ' + current_location.strip()
+            line = current_location + ' ' + line
+            line = re.sub(rf'{incident_types}', r' \1', line)
+            match = re.match(incident_pattern, line)
+            if match:
+                data_ = match.groups()
+                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])  
 
     return extracted_data
 def createdb(db):
@@ -101,7 +99,7 @@ def status(db):
 
     nature_counts = cur.fetchall()
     for nature, count in nature_counts:
-        print(f"{nature}: {count} times")
+        print(f"{nature}|{count}")
 
     conn.close()
 
