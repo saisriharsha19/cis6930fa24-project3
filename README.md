@@ -16,7 +16,7 @@ This project involves downloading, extracting, and processing incident data from
 ## How to Install
 To install the required dependencies, ensure you have pipenv installed. Navigate to the project directory and run:
 
-```bash 'Copy code'
+```bash 
 pipenv install -e .
 ```
 This will install all the necessary dependencies in an isolated environment.
@@ -25,7 +25,7 @@ This will install all the necessary dependencies in an isolated environment.
 Fetching and Storing Incidents
 You can run the project by specifying the URL of the incident summary PDF:
 
-```bash Copy code
+```bash 
 pipenv run python main.py --incidents <incident-summary-url>
 ```
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
@@ -42,7 +42,7 @@ The test files are located in the tests/ folder, ensuring that the critical func
 ## Example Output
 After running the code with an incident PDF, the following output will be printed as an example of the statistical summary:
 
-```python Copy code
+```python 
 911 Call Nature Unknown|1
 Abdominal Pains/Problems|4
 Alarm|7
@@ -60,27 +60,27 @@ Main File
 #### fetchincidents(url): Downloads the incident summary PDF from the given URL.
 ```python
 def fetchincidents(url):
-    pass
+    return "Extracted PDF Document"
 ```
 #### extractincidents(pdf_file): Extracts the incidents from the downloaded PDF file.
 ```python
 def extractincidents(pdf_file):
-    pass
+    return "Extracted Incidents"
 ```
 #### createdb(db): Creates an SQLite database with a table for storing incidents.
 ```python
 def createdb(db):
-    pass
+    return "Creates DB named normanpd"
 ```
 #### populatedb(db, incidents): Inserts the extracted incidents into the database.
 ```python
 def populatedb(db, incidents):
-    pass
+    return "Populates the DB with respective fields from extracted data"
 ```
 #### status(db): Displays statistics of incidents, grouped by their nature, to the console.
 ```python
 def status(db):
-    pass
+    return "Displays Nature with number of times they occured"
 ```
 ## Test Files
 ### test_download.py This file tests the fetchincidents() function by mocking a PDF file download using the requests module.
@@ -115,3 +115,4 @@ def test_status(self):
 ## Bugs and Assumptions
 1. Error Handling: If the URL provided is invalid or the PDF cannot be downloaded, the script raises an exception. There's no specific error handling for malformed URLs.
 2. File Format: The script assumes the PDF file follows the same format as expected for proper incident extraction.
+3. Regex: The regex only works for the cases that matches with the list of ORI's and Natures that has been placed inside the regex, otherwise it might not match as expected.
