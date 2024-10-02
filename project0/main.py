@@ -8,7 +8,7 @@ def main(url):
     incidents = func.extractincidents(incident_data)
     
 
-    db = 'incidents.db'  
+    db = 'resources/normanpd.db'  
 
     func.createdb(db)
 	

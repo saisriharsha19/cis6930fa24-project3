@@ -57,15 +57,13 @@ def createdb(db):
 
     # Create incidents table
     cur.execute('''
-    CREATE TABLE IF NOT EXISTS incidents (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date_time TEXT,
-        incident_number TEXT,
-        location TEXT,
-        nature TEXT,
-        incident_ori TEXT
-    )
-    ''')
+    CREATE TABLE incidents (
+    incident_time TEXT,
+    incident_number TEXT,
+    incident_location TEXT,
+    nature TEXT,
+    incident_ori TEXT
+    );''')
 
     conn.commit()
     conn.close()
@@ -77,7 +75,7 @@ def populatedb(db, incidents):
 
     # Insert data into the database
     cur.executemany('''
-    INSERT INTO incidents (date_time, incident_number, location, nature, incident_ori)
+    INSERT INTO incidents (incident_time, incident_number, incident_location, nature, incident_ori)
     VALUES (?, ?, ?, ?, ?)
     ''', incidents)
 
