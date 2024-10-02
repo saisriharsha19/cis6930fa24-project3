@@ -29,7 +29,7 @@ You can run the project by specifying the URL of the incident summary PDF:
 pipenv run python main.py --incidents <incident-summary-url>
 ```
 Here is an example video of running the code using a valid URL.
-![video] (run.gif)
+(![run.gif](https://github.com/saisriharsha19/cis6930fa24-project0/blob/main/run.gif))
 
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
