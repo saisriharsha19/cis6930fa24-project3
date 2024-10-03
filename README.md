@@ -128,6 +128,24 @@ def test_status(self):
 5. Values are inserted using executemany() option in SQLite.
 6. Respective columns are fetched along with their frequencies in the last step.
 
+### Schema for the table can be created as given below:
+```python
+import sqlite3
+conn = sqlite3.connect(db)
+cur = conn.cursor()
+cur.execute('''DROP TABLE IF EXISTS incidents''')
+cur.execute('''
+    CREATE TABLE incidents (
+    incident_time TEXT,
+    incident_number TEXT,
+    incident_location TEXT,
+    nature TEXT,
+    incident_ori TEXT
+    );''')
+
+conn.commit()
+conn.close()
+```
 
 ## Bugs and Assumptions
 1. Error Handling: If the URL provided is invalid or the PDF cannot be downloaded, the script raises an exception. There's no specific error handling for malformed URLs.
