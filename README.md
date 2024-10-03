@@ -115,6 +115,20 @@ def test_populatedb():
 def test_status(self):
     pass
 ```
+## Database Development
+1. Created a Database named "normandb".
+2. Created a Table named "incidents" in the DB.
+3. If table exixts, delete the table and then create a new table named the same.
+4. The incidents table consists of 5 columns named 
+    incident_time TEXT,
+    incident_number TEXT,
+    incident_location TEXT,
+    nature TEXT and
+    incident_ori TEXT
+5. Values are inserted using executemany() option in SQLite.
+6. Respective columns are fetched along with their frequencies in the last step.
+
+
 ## Bugs and Assumptions
 1. Error Handling: If the URL provided is invalid or the PDF cannot be downloaded, the script raises an exception. There's no specific error handling for malformed URLs.
 2. File Format: The script assumes the PDF file follows the same format as expected for proper incident extraction.
