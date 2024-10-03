@@ -45,8 +45,7 @@ def extractincidents(pdf_file):
             match = re.match(incident_pattern, line)
             if match:
                 data_ = match.groups()
-                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])  
-    print(len(extracted_data))
+                extracted_data.append([data_[0], data_[1], data_[2], data_[4], data_[6]])
     return extracted_data
 def createdb(db):
     conn = sqlite3.connect(db)
