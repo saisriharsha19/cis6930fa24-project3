@@ -34,7 +34,7 @@ cd project3
 pipenv run python app.py
 ```
 Here is an example video of running the code using a valid URL.
-![DE_project3_Video.mp4](https://youtu.be/adIuBQEj-ro)
+![DE_project3_Video.mp4](https://github.com/saisriharsha19/cis6930fa24-project3/blob/main/DE_project3_Video.mp4)
 
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
