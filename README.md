@@ -26,13 +26,15 @@ This will install all the necessary dependencies in an isolated environment.
 
 ## How to Run
 Fetching and Storing Incidents
-You can run the project by specifying the URL of the incident summary PDF:
+You can run the project by following commands:
+### Remember to be in project3 folder before running
 
 ```bash 
-pipenv run python project3/app.py
+cd project3
+pipenv run python app.py
 ```
 Here is an example video of running the code using a valid URL.
-![run.gif](https://github.com/saisriharsha19/cis6930fa24-project0/blob/main/run.gif)
+![DE_project3_Video.mp4](https://youtu.be/adIuBQEj-ro)
 
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
