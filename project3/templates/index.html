@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NormanPD Data Visualization</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #E6F7FF, #ffffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Container Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Header Styling */
+        h1 {
+            color: #1A73E8;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Label Styling */
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #555;
+            text-align: left;
+            font-weight: 500;
+            display: block;
+            padding-left: 10px;
+        }
+
+        /* Input and Textarea Styling */
+        input[type="file"], textarea, button {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input[type="file"] {
+            background-color: #F0F8FF;
+            cursor: pointer;
+        }
+
+        input[type="file"]:focus,
+        textarea:focus,
+        button:focus {
+            outline: none;
+            border-color: #1A73E8;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #1A73E8;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            padding: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4285F4;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #3367D6;
+            transform: translateY(0);
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            label, input, textarea {
+                font-size: 14px;
+            }
+            button {
+                font-size: 16px;
+            }
+        }
+
+        /* Hover Effect on Form */
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload NormanPD Incident PDFs</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="files">Upload Files (Multiple files allowed):</label>
+            <input type="file" name="files" multiple>
+            
+            <label for="urls">Enter URLs (One URL per line):</label>
+            <textarea name="urls" rows="5" placeholder="Enter URLs here..."></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>

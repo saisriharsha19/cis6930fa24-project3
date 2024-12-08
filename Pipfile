@@ -7,6 +7,13 @@ name = "pypi"
 pytest = "*"
 requests = "*"
 pypdf2 = "*"
+flask = "*"
+matplotlib = "*"
+seaborn = "*"
+pandas = "*"
+scikit-learn = "*"
+geopy = "*"
+opencage = "*"
 
 [dev-packages]
 

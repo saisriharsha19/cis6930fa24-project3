@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Visualizations</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f2f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #1A73E8;
+            margin-top: 40px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 40px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chart-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .chart-container {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .chart-container img {
+                max-width: 90%;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Incident Visualizations</h1>
+
+        <div class="chart-container">
+            <div class="chart">
+                <h2>Bar Chart of Incident Nature Frequency</h2>
+                <img src="{{ bar_chart }}" alt="Bar Chart">
+            </div>
+
+            <div class="chart">
+                <h2>Clustering of Incidents by Location</h2>
+                <img src="{{ clustering }}" alt="Clustering">
+            </div>
+
+            <div class="chart">
+                <h2>Histogram of Incidents by Hour</h2>
+                <img src="{{ histogram }}" alt="Heatmap">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Incident Visualization. All Rights Reserved.</p>
+    </div>
+
+    <!-- JavaScript for interactive features -->
+    <script>
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('mouseover', () => {
+                img.style.cursor = 'pointer';
+            });
+        });
+    </script>
+</body>
+</html>

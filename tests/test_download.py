@@ -3,10 +3,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../proj
 import unittest
 from io import BytesIO
 from unittest.mock import patch, MagicMock
-from project0 import func
+from project3 import func
 class TestDownloadAndExtractIncidents(unittest.TestCase):
     
-    @patch('project0.func.requests.get')
+    @patch('project3.func.requests.get')
     def test_fetchincidents(self, mock_get):
         # Mocking a successful PDF fetch
         mock_response = MagicMock()
@@ -18,7 +18,7 @@ class TestDownloadAndExtractIncidents(unittest.TestCase):
 
         self.assertIsInstance(result, BytesIO)
 
-    @patch('project0.func.PdfReader')
+    @patch('project3.func.PdfReader')
     def test_extractincidents(self, mock_PdfReader):
         mock_reader = MagicMock()
         mock_reader.pages = [MagicMock(), MagicMock()]
