@@ -55,7 +55,7 @@ After running the code with an incident PDF, the following visulaizations are cr
 
 ![Histogram](project3/static/histogram.png)
 
-```
+
 ## Functions Overview
 
 ### app.py and func.py
