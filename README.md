@@ -34,11 +34,7 @@ cd project3
 pipenv run python app.py
 ```
 Here is an example video of running the code using a valid URL.
-<iframe width="560" height="315"
-src="https://youtu.be/adIuBQEj-ro" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![DE_project3_Vid!eo.mp4](image.png)](https://youtu.be/adIuBQEj-ro "Video Explanation - Click to Watch!")
 
 This will download the PDF, extract the data, create a local SQLite database, and display the incident nature statistics.
 
