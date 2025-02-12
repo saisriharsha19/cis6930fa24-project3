@@ -1,10 +1,10 @@
-# cis6930fa24-project3
+# Real Time Incident Data Extraction, Database, and Visualization System
 
 # README
 
 # Name: Sai Sri Harsha Guddati
-## Assignment Description
-This project involves downloading, extracting, and processing incident data from a PDF available online. The incident data is extracted and processed, and stored in an SQLite database. Additionally, the assignment involves Visualizing the extracted using three types of data visualizations namely bar chart, clustering and histogram.
+## Project Description
+This project involves downloading, extracting, and processing incident data from a PDF available online. The incident data is extracted and processed, and stored in an SQLite database. Additionally, it involves Visualizing the extracted using three types of data visualizations namely bar chart, clustering and histogram.
 
 1. Uploading or Fetching PDFs: Users can either upload PDF files directly via the UI or provide URLs to fetch PDFs containing incident summaries.
 2. Extracting Incidents: Key information such as date, incident number, location, nature of the incident, and ORI is extracted from the PDF files.
